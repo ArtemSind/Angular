@@ -27,6 +27,17 @@ export class AuthService {
 
   }
 
+  deleteUser(user: IUser): void {
+    const isUserExist = this.userStorage.find(el => el.login === user.login);
+
+    if (isUserExist) {
+      const index = this.userStorage.findIndex(i => i.login === user.login);
+
+      this.userStorage.splice(index, 1);
+    }
+
+  }
+
   isLoginExist(user: IUser): boolean {
 
     const userExist = this.userStorage.find(el => el.login === user.login);

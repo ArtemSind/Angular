@@ -1,0 +1,50 @@
+<div class="d-flex flex-column col-6 registration-input-wrap m-auto pt-5">
+  <div class="m-auto">
+    <span class="mx-3">Логин</span>
+    <input type="text"
+           pInputText
+           [ngClass]="{'input-error': !login}"
+           [(ngModel)]="login"/>
+  </div>
+  <div class="m-auto">
+    <span class="mx-3">Старый пароль</span>
+    <input type="password"
+           class="mt-3"
+           pInputText
+           [ngClass]="{'input-error': !pswOld}"
+           [(ngModel)]="pswOld"/>
+  </div>
+
+  <div class="m-auto">
+    <span class="mx-3">Новый пароль</span>
+    <input type="password"
+           class="mt-3"
+           pInputText
+           [ngClass]="{'input-error': !pswNew}"
+           [(ngModel)]="pswNew"/>
+  </div >
+
+  <div class="m-auto">
+    <span class="mx-3">Подтверждение пароля</span>
+    <input type="password"
+           class="mt-3"
+           pInputText
+           [ngClass]="{'input-error': !pswNewRepeat}"
+           [(ngModel)]="pswNewRepeat"/>
+  </div >
+
+  <a routerLink="/tickets/tickets-list">Назад</a>
+
+
+
+</div>
+
+<div class="mt-5 d-flex justify-content-center m-auto">
+  <button [disabled]="!login || !pswOld || !pswNew || !pswNewRepeat"
+          (click)="changePassword($event)"
+          type="button"
+          class="btn btn-success ">
+    Сменить пароль
+  </button>
+</div>
+
