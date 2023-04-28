@@ -5,3 +5,22 @@
               (onChange)="changeType($event)">
   </p-dropdown>
 </div>
+<!--Добавлен новый список-->
+<div class="mt-3">
+  <p-dropdown class="mt-3"
+              [options]="tourTypes"
+              optionLabel="label"
+              (onChange)="changeTourType($event)">
+  </p-dropdown>
+</div>
+<div class="mt-3">
+  <p-calendar (onSelect)="selectDate($event)" ></p-calendar>
+</div>
+<div class="mt-3">
+  <button class="btn-sm btn" (click)="initRestError()">Запрос с ошибкой</button>
+</div>
+<div class="mt-3">
+  <button class="btn-sm btn" (click)="initSettingsData()">Обновить настройки</button>
+</div>
+
+<p-toast></p-toast>

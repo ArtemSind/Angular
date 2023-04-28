@@ -1,14 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../../services/auth/auth.service";
 import {MessageService} from "primeng/api";
 import {IUser} from "../../../models/users";
+import {Subject, Subscription, take, takeUntil} from "rxjs";
+import {SettingsService} from "../../../services/settings/settings.service";
 
 @Component({
   selector: 'app-settings-item',
   templateUrl: './settings-item.component.html',
   styleUrls: ['./settings-item.component.scss']
 })
-export class SettingsItemComponent implements OnInit {
+export class SettingsItemComponent implements OnInit, OnDestroy {
+
+  private subjectForUnsubscribe = new Subject();
 
   login: string;
   pswOld: string;
@@ -16,10 +20,22 @@ export class SettingsItemComponent implements OnInit {
   pswNewRepeat: string;
 
   constructor(private authService: AuthService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private settingsService: SettingsService) {
   }
 
   ngOnInit(): void {
+
+    this.settingsService.loadUserSettings().pipe(takeUntil(this.subjectForUnsubscribe)).subscribe((data) => {
+      console.log('settings data', data);
+    })
+
+    this.settingsService.getSettingsSubjectObservable().pipe(takeUntil(this.subjectForUnsubscribe)).subscribe(
+      (data) => {
+        console.log('settings data from subject', data);
+      }
+    )
+
   }
 
   changePassword(ev: Event): void {
@@ -46,6 +62,11 @@ export class SettingsItemComponent implements OnInit {
     this.authService.setUser(userObj);
 
     this.messageService.add({severity: 'success', summary: 'Пароль успешно изменён'});
+  }
+
+  ngOnDestroy(): void {
+    this.subjectForUnsubscribe.next(true);
+    this.subjectForUnsubscribe.complete();
   }
 
 }

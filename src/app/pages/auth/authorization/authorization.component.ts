@@ -4,6 +4,7 @@ import {IUser} from "../../../models/users";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {UserService} from "../../../services/user/user.service";
+import {ConfigService} from "../../../services/config/config.service";
 
 @Component({
   selector: 'app-authorization',
@@ -20,6 +21,7 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
   cardNumber: string;
   selectedValue: boolean;
   authTextButton: string
+  showCardNumber: boolean;
 
 
   constructor(private authService: AuthService,
@@ -29,7 +31,8 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authTextButton = 'Авторизоваться'
+    this.authTextButton = 'Авторизоваться';
+    this.showCardNumber = ConfigService.config.useUserCard;
   }
 
   ngOnDestroy(): void {
@@ -42,7 +45,8 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
 
     const authUser: IUser = {
       psw: this.psw,
-      login: this.login
+      login: this.login,
+      cardNumber: this.cardNumber
     }
 
     if (!this.authService.isUserExists(authUser)) {
@@ -51,6 +55,8 @@ export class AuthorizationComponent implements OnInit, OnDestroy {
     }
 
     this.userService.setUser(authUser);
+    this.userService.setToken('user-private-token');
+
 
     this.router.navigate(['tickets/tickets-list']);
   }

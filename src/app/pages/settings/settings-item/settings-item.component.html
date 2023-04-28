@@ -33,13 +33,14 @@
            [(ngModel)]="pswNewRepeat"/>
   </div >
 
-  <a routerLink="/tickets/tickets-list">Назад</a>
+
 
 
 
 </div>
 
 <div class="mt-5 d-flex justify-content-center m-auto">
+  <button class="btn btn-dark m-lg-2" routerLink="/tickets/tickets-list">Назад</button>
   <button [disabled]="!login || !pswOld || !pswNew || !pswNewRepeat"
           (click)="changePassword($event)"
           type="button"

@@ -22,7 +22,7 @@
            pInputText
            [ngClass]="{'input-error': !pswRepeat}"
            [(ngModel)]="pswRepeat"/>
-  </div >
+  </div>
 
   <div class="m-auto">
     <span class="mx-3">Почта</span>
@@ -32,17 +32,19 @@
            [(ngModel)]="email"/>
   </div>
 
-  <div class="m-auto">
-    <span class="mx-3">Номер карты</span>
-    <input type="text"
-           class="mt-3"
-           pInputText
-           [(ngModel)]="cardNumber"/>
+  <div *ngIf="showCardNumber">
+    <div class="m-auto">
+      <span class="mx-3">Номер карты</span>
+      <input type="text"
+             class="mt-3"
+             pInputText
+             [(ngModel)]="cardNumber"/>
+    </div>
   </div>
 
   <div class="m-auto">
     <p-checkbox label="Сохранить пользователя в локальном хранилище"
-                name="groupname" [binary]= "true"
+                name="groupname" [binary]="true"
                 [(ngModel)]="shouldSaveToLocalStore"></p-checkbox>
   </div>
 

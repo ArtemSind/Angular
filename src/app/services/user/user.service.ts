@@ -7,6 +7,7 @@ import {IUser} from "../../models/users";
 export class UserService {
 
   private user: IUser;
+  private token: string;
 
 
   constructor() {
@@ -18,6 +19,17 @@ export class UserService {
 
   setUser(user: IUser): void {
     this.user = user
+  }
 
+  setToken(token: string):void {
+    this.token = token;
+  }
+
+  getToken(): string {
+    return this.token;
+  }
+
+  deleteToken(): void {
+    this.token = '';
   }
 }

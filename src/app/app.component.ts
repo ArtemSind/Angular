@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ConfigService} from "./services/config/config.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ticketSales2022';
+
+  constructor() {
+  }
 }

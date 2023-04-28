@@ -43,8 +43,10 @@ export class BlocksStyleDirective implements OnInit, AfterViewInit, OnChanges {
     setTimeout(() => {
       this.renderComplete.emit(true);
     })
+  }
 
-
+  updateItems(): void {
+    this.items = this.el.nativeElement.querySelectorAll(this.selector);
   }
 
   initKeyUp(ev: KeyboardEvent): void {
