@@ -1,10 +1,11 @@
 <div>
 
-
+<div *ngIf="loadCountBlock">
   <div>
-    <p>Количество элементов: {{tickets.length}}</p>
-    <p>Активный элемент: {{blockDirective.activeElementIndex}}</p>
+    <p>Количество элементов: {{tickets?.length}}</p>
+    <p>Активный элемент: {{blockDirective?.activeElementIndex}}</p>
   </div>
+</div>
 
   <div>
     <input #ticketSearch [(ngModel)]="ticketSearchValue" type="text" pInputText>

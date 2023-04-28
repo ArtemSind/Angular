@@ -7,6 +7,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {InputTextModule} from "primeng/inputtext";
 import {PaginatorModule} from "primeng/paginator";
 import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {MessageService} from "primeng/api";
     SettingsRoutingModule,
     CheckboxModule,
     InputTextModule,
-    PaginatorModule
+    PaginatorModule,
+    ToastModule
   ],
   providers: [MessageService]
 })

@@ -17,6 +17,7 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
   tickets: ITour[];
   tourUnsubscriber: Subscription;
   ticketsCopy: ITour[];
+  loadCountBlock = false;
 
   @ViewChild('tourWrap', {read: BlocksStyleDirective}) blockDirective: BlocksStyleDirective;
   @ViewChild('tourWrap') tourWrap: ElementRef;
@@ -45,6 +46,8 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     )
 
+    this.loadCountBlock = true;
+
 
     this.tourUnsubscriber = this.ticketService
       .getTicketTypeObservable()
@@ -71,11 +74,13 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
           this.tickets = this.ticketsCopy.filter((el) => el.date === dateValue);
         }
 
+
         setTimeout(() => {
 
           this.blockDirective.updateItems();
 
-          this.blockDirective.initStyle(0);  // сбрасываем индекс на 0 элемент
+          this.blockDirective.initStyle(0); // сбрасываем индекс на 0 элемент
+
         });
 
 
@@ -88,7 +93,7 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchTicketSub = fromEventObserver.pipe(
       debounceTime(200)).subscribe((ev) => {
         if (this.ticketSearchValue) {
-          this.tickets = this.ticketsCopy.filter((el) => el.name.includes(this.ticketSearchValue));
+          this.tickets = this.ticketsCopy.filter((el) => el.name.toLowerCase().includes(this.ticketSearchValue.toLowerCase()));
         } else {
           this.tickets = [...this.ticketsCopy];
         }

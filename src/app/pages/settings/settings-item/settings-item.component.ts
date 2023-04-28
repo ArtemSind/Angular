@@ -4,6 +4,7 @@ import {MessageService} from "primeng/api";
 import {IUser} from "../../../models/users";
 import {Subject, Subscription, take, takeUntil} from "rxjs";
 import {SettingsService} from "../../../services/settings/settings.service";
+import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'app-settings-item',
@@ -14,14 +15,14 @@ export class SettingsItemComponent implements OnInit, OnDestroy {
 
   private subjectForUnsubscribe = new Subject();
 
-  login: string;
   pswOld: string;
   pswNew: string;
   pswNewRepeat: string;
 
   constructor(private authService: AuthService,
               private messageService: MessageService,
-              private settingsService: SettingsService) {
+              private settingsService: SettingsService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -41,12 +42,12 @@ export class SettingsItemComponent implements OnInit, OnDestroy {
   changePassword(ev: Event): void {
 
     const userObj: IUser = {
-      login: this.login,
+      login: this.userService.getUser().login,
       psw: this.pswOld
     }
 
     if (!this.authService.isUserExists(userObj)) {
-      this.messageService.add({severity: 'error', summary: 'Неверный логин или пароль'});
+      this.messageService.add({severity: 'error', summary: 'Неверный пароль'});
       return;
     }
 

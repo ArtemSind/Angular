@@ -1,13 +1,7 @@
 <div class="d-flex flex-column col-6 registration-input-wrap m-auto pt-5">
+
   <div class="m-auto">
-    <span class="mx-3">Логин</span>
-    <input type="text"
-           pInputText
-           [ngClass]="{'input-error': !login}"
-           [(ngModel)]="login"/>
-  </div>
-  <div class="m-auto">
-    <span class="mx-3">Старый пароль</span>
+    <span class="mx-3">Текущий пароль</span>
     <input type="password"
            class="mt-3"
            pInputText
@@ -33,19 +27,18 @@
            [(ngModel)]="pswNewRepeat"/>
   </div >
 
-
-
-
-
 </div>
 
 <div class="mt-5 d-flex justify-content-center m-auto">
   <button class="btn btn-dark m-lg-2" routerLink="/tickets/tickets-list">Назад</button>
-  <button [disabled]="!login || !pswOld || !pswNew || !pswNewRepeat"
+  <button [disabled]="!pswOld || !pswNew || !pswNewRepeat"
           (click)="changePassword($event)"
           type="button"
           class="btn btn-success ">
     Сменить пароль
   </button>
 </div>
+
+<p-toast></p-toast>
+
 
