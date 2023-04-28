@@ -8,11 +8,15 @@ import {InputTextModule} from "primeng/inputtext";
 import {PaginatorModule} from "primeng/paginator";
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
+import { StatisticComponent } from './statistic/statistic.component';
+import {TabViewModule} from "primeng/tabview";
+import {TableModule} from "primeng/table";
 
 
 @NgModule({
   declarations: [
-    SettingsItemComponent
+    SettingsItemComponent,
+    StatisticComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,9 @@ import {ToastModule} from "primeng/toast";
     CheckboxModule,
     InputTextModule,
     PaginatorModule,
-    ToastModule
+    ToastModule,
+    TabViewModule,
+    TableModule
   ],
   providers: [MessageService]
 })
