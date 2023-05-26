@@ -15,6 +15,7 @@ import {CalendarModule} from "primeng/calendar";
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {InputTextModule} from "primeng/inputtext";
+import { OrderListComponent } from './order-list/order-list.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {InputTextModule} from "primeng/inputtext";
     FooterComponent,
     TicketListComponent,
     AsideComponent,
-    BlocksStyleDirective
+    BlocksStyleDirective,
+    OrderListComponent
   ],
   imports: [
     CommonModule,

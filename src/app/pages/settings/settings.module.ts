@@ -11,12 +11,15 @@ import {ToastModule} from "primeng/toast";
 import { StatisticComponent } from './statistic/statistic.component';
 import {TabViewModule} from "primeng/tabview";
 import {TableModule} from "primeng/table";
+import { TourLoaderComponent } from './tour-loader/tour-loader.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     SettingsItemComponent,
-    StatisticComponent
+    StatisticComponent,
+    TourLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +29,8 @@ import {TableModule} from "primeng/table";
     PaginatorModule,
     ToastModule,
     TabViewModule,
-    TableModule
+    TableModule,
+    ReactiveFormsModule
   ],
   providers: [MessageService]
 })

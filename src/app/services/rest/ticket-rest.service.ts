@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {INearestTour, ITour, ITourLocation} from "../../models/tours";
+import {IOrder} from "../../models/order";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class TicketRestService {
   constructor(private http: HttpClient) { }
 
   getTickets(): Observable<ITour[]> {
-    return this.http.get<ITour[]>('https://62b9e756ff109cd1dc9dae16.mockapi.io/apiv/v1/tours/');
+    return this.http.get<ITour[]>('http://localhost:3000/tours/');
+  }
+
+  getTicket(id: string): Observable<ITour> {
+    return this.http.get<ITour>('http://localhost:3000/tours/' + id);
   }
 
   getRestError(): Observable<any> {
@@ -19,7 +24,7 @@ export class TicketRestService {
   }
 
   getNearestTickets(): Observable<INearestTour[]> {
-    return this.http.get<INearestTour[]>('https://62b9e756ff109cd1dc9dae16.mockapi.io/apiv/v1/nearestTours/')
+    return this.http.get<INearestTour[]>('http://localhost:3000/tours/')
   }
 
   getLocationList(): Observable<ITourLocation[]> {
@@ -29,19 +34,26 @@ export class TicketRestService {
   getRandomNearestEvent(type: number): Observable<INearestTour> {
     switch (type) {
       case 0:
-        return this.http.get<INearestTour>('/assets/mocks/nearestTours1.json')
+        return this.http.get<INearestTour>('http://localhost:3000/tours/')
       case 1:
-        return this.http.get<INearestTour>('/assets/mocks/nearestTours2.json')
+        return this.http.get<INearestTour>('http://localhost:3000/tours/')
       case 2:
-        return this.http.get<INearestTour>('/assets/mocks/nearestTours3.json')
+        return this.http.get<INearestTour>('http://localhost:3000/tours/')
       default:
-        return this.http.get<INearestTour>('/assets/mocks/nearestTours2.json')
+        return this.http.get<INearestTour>('http://localhost:3000/tours/')
     }
   }
 
-  sendTourData(data: any): Observable<any>{
-    return this.http.post('/assets/mocks/nearestTours2.json', data)
-
-
+  sendTourData(data: IOrder): Observable<any>{
+    return this.http.post('http://localhost:3000/orders/', data)
   }
+
+  createTour(body: any) {
+    return this.http.post('http://localhost:3000/tour-item/', body, {headers: {}});
+  }
+
+  searchTour(name: string): Observable<ITour[]> {
+    return this.http.get<ITour[]>('http://localhost:3000/tour-item/' + name)
+  }
+
 }

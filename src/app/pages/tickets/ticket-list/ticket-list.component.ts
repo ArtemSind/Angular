@@ -6,6 +6,7 @@ import {TicketsStorageService} from "../../../services/tiсkets-storage/tiсkets
 import {BlocksStyleDirective} from "../../../directives/blocks-style.directive";
 import {debounce, debounceTime, fromEvent, Subscription} from "rxjs";
 import {UserService} from "../../../services/user/user.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-ticket-list',
@@ -26,25 +27,30 @@ export class TicketListComponent implements OnInit, AfterViewInit, OnDestroy {
   searchTicketSub: Subscription;
   ticketSearchValue: string;
 
+
+
   constructor(private ticketService: TicketsService,
               private router: Router,
               private route: ActivatedRoute,
               private ticketStorage: TicketsStorageService,
-              private userService: UserService) {
+              private userService: UserService,
+              private http: HttpClient) {
   }
 
 
 
   ngOnInit(): void {
-    this.userService.setToken('user-private-token');
 
-    this.ticketService.getTickets().subscribe(
-      (data) => {
-        this.tickets = data;
-        this.ticketsCopy = [...this.tickets];
-        this.ticketStorage.setStorage(data);
-      }
-    )
+    this.ticketService.ticketUpdateSubject$.subscribe(data => {
+      this.tickets = data;
+    })
+
+    this.http.post<ITour[]>("http://localhost:3000/tours/", {}).subscribe((data) => {
+      console.log(data);
+      this.ticketService.updateTicketList(data);
+    })
+
+
 
     this.loadCountBlock = true;
 
